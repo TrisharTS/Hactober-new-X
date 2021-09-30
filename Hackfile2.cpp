@@ -3,16 +3,16 @@
 int i;
  struct node {
   int info;
-  struct node *lchild;
-  struct node *rchild;
+  struct node *lc;
+  struct node *rc;
  }; typedef struct node *Node;
 
 Node createnode(int item)
 {
   Node newnode=(Node)malloc(sizeof(struct node));
   newnode->info=item;
-  newnode->lchild=NULL;
-  newnode->rchild=NULL;
+  newnode->lc=NULL;
+  newnode->rc=NULL;
   return newnode;
 }
 
@@ -21,28 +21,28 @@ void insertBST(Node root, Node newnode)
   if(root->info==newnode->info)
   {
     i--;
-    printf("Value already exists");
+    printf("Value exists already");
   }
   else if(root->info<newnode->info)
   {
-    if(root->rchild==NULL)
+    if(root->rc==NULL)
     {
-      root->rchild=newnode;   
+      root->rc=newnode;   
     }  
     else
     {
-      insertBST(root->rchild,newnode);
+      insertBST(root->rc,newnode);
     }
   }
 else
  {
-  if(root->lchild==NULL)
+  if(root->lc==NULL)
     {
-      root->lchild=newnode;
+      root->lc=newnode;
     }  
     else
     {
-      insertBST(root->lchild,newnode);
+      insertBST(root->lc,newnode);
     }
  }
 }
@@ -51,9 +51,9 @@ void inorder(Node temp)
 {
  if(temp!=NULL)
   {
-    inorder(temp->lchild);
+    inorder(temp->lc);
     printf("%d\t",temp->info);
-    inorder(temp->rchild);
+    inorder(temp->rc);
   }
 }
 void preorder(Node temp)
@@ -61,16 +61,16 @@ void preorder(Node temp)
  if(temp!=NULL)
   {
      printf("%d\t",temp->info);
-    inorder(temp->lchild);
-    inorder(temp->rchild);
+    inorder(temp->lc);
+    inorder(temp->rc);
   }
 }
 void postorder(Node temp)
 {
  if(temp!=NULL)
   {
-    inorder(temp->lchild);
-    inorder(temp->rchild);
+    inorder(temp->lc);
+    inorder(temp->rc);
     printf("%d\t",temp->info);
   }
 }
